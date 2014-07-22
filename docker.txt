@@ -1,4 +1,16 @@
+Setup for EC2 Ubuntu 14.04
+#Add this in advanced setup
 $ curl -s https://get.docker.io/ubuntu/ | sudo sh
+
+# or type it and log in again to get the group right
+
+# then sudo nano /etc/hosts
+# and add 127.0.1.1 ip-xxx-xx-x-xxx localhost
+## as instructed by https://forums.aws.amazon.com/message.jspa?messageID=412397
+
+$ sudo docker run -i -t ubuntu /bin/bash # to test install
+
+
 
 # Commands
 docker version
