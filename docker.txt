@@ -1,0 +1,54 @@
+$ curl -s https://get.docker.io/ubuntu/ | sudo sh
+
+# Commands
+docker version
+
+docker search <string>
+## if error dial unix /var/run/docker.sock: permission denied
+## then  add yourself to the group docker and logout/in
+
+docker pull <username>/<repository>
+docker pull learn/tutorial
+
+### You'll see several layers downloaded
+
+## You can think of containers as a process in a box. The box contains everything the processs might need, so it has the filesystem, systme libraries, shell and such, but by default none of these are running. You 'start' a container by running a process in it.
+
+docker run <image name> <command>
+docker run learn/tutorial echo "hello world"
+
+### this opened a container and ran a process. When the process stopped, so did the container.
+
+# Installing things
+## Next we are going to install a simple utility, ping, in the container. Even though the container stops right after a command completes, the changes are not forgotten.
+
+docker run <image name> <command>
+docker run learn/tutorial apt-get install -y ping
+
+### Changes to the filesystem have been kept, but are not yet saved.
+
+# Save changes
+## The process of saving the state is called committing. Comitt basically saves the difference between the old image and the new state.
+
+docker ps -l
+###finds the id of the container with ping installed
+
+docker commit <container ID> <repository<tag>>
+
+# Run new image
+## There is now a complete, self-contained image with 'ping' installed. Run it.
+
+docker run learn/ping ping <website>
+
+# Container checking
+
+docker ps
+
+docker inspect <ID>
+### displays ip address, status, state, what have you
+
+## Push image to dockerhub registry
+
+docker push <NAME>
+docker push learn/ping
+
